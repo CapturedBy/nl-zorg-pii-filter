@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nl-zorg-pii-filter"
+version = "0.1.0"
+description = "Detect, mask and restore Dutch personal data (BSN, names, addresses, dates of birth, phone, email) before text goes to an LLM."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Marloes Gerdes" }]
+keywords = ["pii", "privacy", "avg", "gdpr", "bsn", "healthcare", "dutch", "llm", "anonymization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Healthcare Industry",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Dutch",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Text Processing :: Filters",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff==0.15.11"]
+
+[project.scripts]
+nl-pii = "nl_zorg_pii.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/CapturedBy/nl-zorg-pii-filter"
+Issues = "https://github.com/CapturedBy/nl-zorg-pii-filter/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nl_zorg_pii = ["data/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
